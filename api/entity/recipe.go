@@ -1,12 +1,10 @@
 package entity
 
-type Party struct {
-	ID          int   `gorm:"primary_key;auto_increment" json:"id"`
-	Name       string `gorm:"type:varchar(255);not null" json:"name"`
-	Leader       string `gorm:"type:varchar(255);not null" json:"leader"`
-	Region       string `gorm:"type:varchar(255);not null" json:"region"`
-	Vote        int ` json:"vote"`
-	Description string `gorm:"type:varchar(255);not null" json:"description"`
-	HPRMembers        int ` json:"hpr"`
-
+type Recipe struct {
+	ID           int    `gorm:"primary_key;auto_increment" json:"id"`
+	Image        string `gorm:"type:varchar(255);not null" json:"image"`
+	RecipeName   string `gorm:"type:varchar(255);not null" json:"name"`
+	Causions     string `gorm:"type:varchar(255);not null" json:"causions"`
+	Instructions string `gorm:"type:varchar(255);not null" json:"instructions"`
+	Calories     int    ` json:"calories"`
 }

@@ -1,11 +1,13 @@
-package party
+package Recipe
 
-import "github.com/Rob-a21/flutter_backend/api/entity"
+import (
+	"github.com/Rob-a21/enjoy_recipe_backend/GoLang-Backend-/api/entity"
+)
 
-type PartyRepository interface {
-	Parties() ([]entity.Party, []error)
-	Party(id uint32) (*entity.Party, []error)
-	StoreParty(user *entity.Party) (*entity.Party, []error)
-	UpdateParty(order *entity.Party) (*entity.Party, []error)
-	DeleteParty(id uint32) (*entity.Party, []error)
+type RecipeRepository interface {
+	Recipies() ([]entity.Recipe, []error)
+	Recipe(id uint32) (*entity.Recipe, []error)
+	StoreRecipe(recipe *entity.Recipe) (*entity.Recipe, []error)
+	UpdateRecipe(order *entity.Recipe) (*entity.Recipe, []error)
+	DeleteRecipe(id uint32) (*entity.Recipe, []error)
 }
