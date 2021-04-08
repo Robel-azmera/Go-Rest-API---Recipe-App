@@ -17,25 +17,9 @@ import (
 	_ "github.com/lib/pq"
 )
 
-//func createTables(dbConn *gorm.DB) []error {
-//	dbConn.DropTableIfExists(&entity.Role{},&entity.User{}, &entity.Election{},
-//		&entity.Party{}).GetErrors()
-//	errs := dbConn.CreateTable(&entity.Role{},&entity.User{},&entity.Election{}, &entity.Party{}).GetErrors()
-//	dbConn.Debug().Model(&entity.User{}).AddForeignKey("user_id", "user(Id)", "cascade", "cascade")
-//	dbConn.Debug().Model(&entity.Role{}).AddForeignKey("role_id", "role(Id)", "cascade", "cascade")
-//	dbConn.Debug().Model(&entity.Election{}).AddForeignKey("election_id", "election(Id)", "cascade", "cascade")
-//	dbConn.Debug().Model(&entity.Party{}).AddForeignKey("party_id", "party(Id)", "cascade", "cascade")
-//
-//
-//	if len(errs )>0 {
-//		return errs
-//	}
-//	return nil
-//}
-
 func createTables(dbConn *gorm.DB) []error {
 
-	dbConn.DropTableIfExists(&entity.Recipe{}).GetErrors()
+	// dbConn.DropTableIfExists(&entity.Recipe{}).GetErrors()
 
 	err := dbConn.CreateTable(&entity.Recipe{}).GetErrors()
 

@@ -116,7 +116,7 @@ func (fah *RecipeApiHandler) UpdateRecipe(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	rec, errs := fah.recipeServices.Recipe(uint32(id))
+	rcp, errs := fah.recipeServices.Recipe(uint32(id))
 	var recipeWithStringTimeStamp RecipeWithStringTimeStamp
 	if len(errs) > 0 {
 		fmt.Println("134")
@@ -127,6 +127,7 @@ func (fah *RecipeApiHandler) UpdateRecipe(w http.ResponseWriter, r *http.Request
 
 	body := utils.BodyParser(r)
 	err = json.Unmarshal(body, &recipeWithStringTimeStamp)
+
 	if err != nil {
 		fmt.Println("153")
 		w.Header().Set("Content-Type", "application/json")
@@ -134,21 +135,21 @@ func (fah *RecipeApiHandler) UpdateRecipe(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	rec.ID = recipeWithStringTimeStamp.ID
-	rec.Calories = recipeWithStringTimeStamp.Calories
-	rec.Causions = recipeWithStringTimeStamp.Causions
-	rec.Image = recipeWithStringTimeStamp.Image
-	rec.Instructions = recipeWithStringTimeStamp.Instructions
-	rec.RecipeName = recipeWithStringTimeStamp.RecipeName
+	// rcp.ID = recipeWithStringTimeStamp.ID
+	rcp.RecipeName = recipeWithStringTimeStamp.RecipeName
+	rcp.Causions = recipeWithStringTimeStamp.Causions
+	rcp.Calories = recipeWithStringTimeStamp.Calories
+	rcp.Instructions = recipeWithStringTimeStamp.Instructions
+	rcp.Image = recipeWithStringTimeStamp.Image
 
-	rec, errs = fah.recipeServices.UpdateRecipe(rec)
+	rcp, errs = fah.recipeServices.UpdateRecipe(rcp)
 	if len(errs) > 0 {
 		fmt.Println("169")
 		w.Header().Set("Content-Type", "application/json")
 		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		return
 	}
-	output, err := json.MarshalIndent(rec, "", "\t\t")
+	output, err := json.MarshalIndent(rcp, "", "\t\t")
 
 	if err != nil {
 		fmt.Println("170")
@@ -162,58 +163,6 @@ func (fah *RecipeApiHandler) UpdateRecipe(w http.ResponseWriter, r *http.Request
 	return
 }
 
-//func (cah *ElectionApiHandler) UpdateElection(w http.ResponseWriter, r *http.Request) {
-//	params := mux.Vars(r)
-//	id, err := strconv.Atoi(params["id"])
-//	if err != nil {
-//		w.Header().Set("Content-Type", "application/json")
-//		http.Error(w, http.StatusText(http.StatusUnprocessableEntity), http.StatusUnprocessableEntity)
-//		return
-//	}
-//
-//	par, errs := cah.electionServices.Election(uint32(id))
-//
-//	if len(errs) > 0 {
-//		fmt.Println("119  %s",errs)////////////////////////////////////////////////////////////////////////////
-//		w.Header().Set("Content-Type", "application/json")
-//		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
-//		return
-//	}
-//	l := r.ContentLength
-//
-//	body := make([]byte, l)
-//
-//	_, err = r.Body.Read(body)
-//	if err != nil {
-//		//fmt.Println("130  %s",err)
-//		w.Header().Set("Content-Type", "application/json")
-//		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
-//		return
-//	}
-//	err = json.Unmarshal(body, &par)
-//	if err != nil {
-//		w.Header().Set("Content-Type", "application/json")
-//		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
-//		return
-//	}
-//	par, errs = cah.electionServices.UpdateElection(par)
-//
-//	if len(errs) > 0 {
-//		w.Header().Set("Content-Type", "application/json")
-//		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
-//		return
-//	}
-//	output, err := json.MarshalIndent(par, "", "\t\t")
-//
-//	if err != nil {
-//		w.Header().Set("Content-Type", "application/json")
-//		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
-//		return
-//	}
-//	w.Header().Set("Content-Type", "application/json")
-//	_, _ = w.Write(output)
-//	return
-//}
 func (cah *RecipeApiHandler) DeleteRecipe(w http.ResponseWriter, r *http.Request) {
 
 	params := mux.Vars(r)
