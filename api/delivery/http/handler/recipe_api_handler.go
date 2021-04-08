@@ -214,7 +214,7 @@ func (fah *RecipeApiHandler) UpdateRecipe(w http.ResponseWriter, r *http.Request
 //	_, _ = w.Write(output)
 //	return
 //}
-func (cah *RecipeApiHandler) DeleteElection(w http.ResponseWriter, r *http.Request) {
+func (cah *RecipeApiHandler) DeleteRecipe(w http.ResponseWriter, r *http.Request) {
 
 	params := mux.Vars(r)
 	id, err := strconv.Atoi(params["id"])
